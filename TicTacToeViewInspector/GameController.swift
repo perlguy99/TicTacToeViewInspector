@@ -11,10 +11,6 @@ class GameController {
     var currentTurn = "X"
     
     func updateTurn() {
-        if currentTurn == "X" {
-            currentTurn = "O"
-        } else {
-            currentTurn = "X"
-        }
+        currentTurn = currentTurn == "X" ? "O" : "X"
     }
 }
