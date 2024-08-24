@@ -24,4 +24,8 @@ class GameController {
     func updateTurn() {
         currentTurn = currentTurn == .x ? .o : .x
     }
+    
+    func takeTurn() {
+        updateTurn()
+    }
 }

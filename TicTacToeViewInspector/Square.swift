@@ -14,5 +14,10 @@ class Square {
         case o
     }
 
+    let index: Int
     var state = State.empty
+    
+    init(index: Int = 0) {
+        self.index = index
+    }
 }
