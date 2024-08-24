@@ -16,37 +16,37 @@ final class GameControllerTests: XCTestCase {
     
     func testInitialStateOfCurrentTurn() throws {
         let sut = GameController()
-        XCTAssertEqual(sut.currentTurn, "X")
+        XCTAssertEqual(sut.currentTurn, .x)
     }
     
     func testChangeCurrentTurn() throws {
         let sut = GameController()
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "O")
+        XCTAssertEqual(sut.currentTurn, .o)
     }
     
     func testChangeCurrentTurnTo_O_then_X() throws {
         let sut = GameController()
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "O")
+        XCTAssertEqual(sut.currentTurn, .o)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "X")
+        XCTAssertEqual(sut.currentTurn, .x)
     }
 
     func testChangeCurrentTurnTo_O_then_X_Multiple() throws {
         let sut = GameController()
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "O")
+        XCTAssertEqual(sut.currentTurn, .o)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "X")
+        XCTAssertEqual(sut.currentTurn, .x)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "O")
+        XCTAssertEqual(sut.currentTurn, .o)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "X")
+        XCTAssertEqual(sut.currentTurn, .x)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "O")
+        XCTAssertEqual(sut.currentTurn, .o)
         sut.updateTurn()
-        XCTAssertEqual(sut.currentTurn, "X")
+        XCTAssertEqual(sut.currentTurn, .x)
     }
 
 }
