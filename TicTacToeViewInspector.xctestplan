@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "82272247-DB03-4FBF-8C4C-DB5F16C4A3FB",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:TicTacToeViewInspector.xcodeproj",
+      "identifier" : "847C24452C7A196A008D723F",
+      "name" : "TicTacToeViewInspector"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:TicTacToeViewInspector.xcodeproj",
+        "identifier" : "847C24552C7A196C008D723F",
+        "name" : "TicTacToeViewInspectorTests"
+      }
+    }
+  ],
+  "version" : 1
+}
