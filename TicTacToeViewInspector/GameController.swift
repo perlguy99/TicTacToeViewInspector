@@ -7,13 +7,19 @@
 
 import SwiftUI
 
-enum Turn {
-    case x
-    case o
-}
 
 class GameController {
+    enum Turn {
+        case x
+        case o
+    }
+    
     var currentTurn: Turn = .x
+    var gameBoard: [Square] = []
+    
+    init() {
+        gameBoard = [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()]
+    }
     
     func updateTurn() {
         currentTurn = currentTurn == .x ? .o : .x

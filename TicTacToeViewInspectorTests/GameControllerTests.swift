@@ -49,4 +49,37 @@ final class GameControllerTests: XCTestCase {
         XCTAssertEqual(sut.currentTurn, .x)
     }
 
+    func testThatGameBoardExists() throws {
+        let sut = GameController()
+        XCTAssertNotNil(sut.gameBoard)
+    }
+    
+    func testInitialStateOfGameBoard() throws {
+        let sut = GameController()
+        validateInitialState(sut: sut)
+        validateEmptyGameBoard(sut: sut)
+    }
+
+    
+    // MARK: - Helper Functions
+    func validateInitialState(sut: GameController) {
+        XCTAssertEqual(sut.currentTurn, .x)
+        XCTAssertEqual(sut.gameBoard.count, 9)
+    }
+    
+    func validateEmptyGameBoard(sut: GameController) {
+        // All 9 squares need to be "Empty"
+        for square in sut.gameBoard {
+            XCTAssertEqual(square.state, .empty)
+        }
+        
+        for square in sut.gameBoard {
+            XCTAssertNotEqual(square.state, .x)
+        }
+
+        for square in sut.gameBoard {
+            XCTAssertNotEqual(square.state, .o)
+        }
+    }
+
 }
