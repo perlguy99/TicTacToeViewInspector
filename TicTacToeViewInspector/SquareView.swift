@@ -20,6 +20,7 @@ struct SquareView: View {
                     .resizable()
                     .frame(width: 75, height: 75)
             )
+            .tag("SquareView.Rectangle")
     }
 }
 

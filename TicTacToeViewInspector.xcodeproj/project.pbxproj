@@ -17,6 +17,7 @@
 		847C24752C7A4E9E008D723F /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C24742C7A4E9E008D723F /* GameController.swift */; };
 		847C24772C7A571F008D723F /* SquareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C24762C7A571F008D723F /* SquareTests.swift */; };
 		847C24792C7A5745008D723F /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C24782C7A5745008D723F /* Square.swift */; };
+		84E91FF52C7BD4AD001F7DC1 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 84E91FF42C7BD4AD001F7DC1 /* ViewInspector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E91FF52C7BD4AD001F7DC1 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +150,9 @@
 				847C24582C7A196C008D723F /* PBXTargetDependency */,
 			);
 			name = TicTacToeViewInspectorTests;
+			packageProductDependencies = (
+				84E91FF42C7BD4AD001F7DC1 /* ViewInspector */,
+			);
 			productName = TicTacToeViewInspectorTests;
 			productReference = 847C24562C7A196C008D723F /* TicTacToeViewInspectorTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -180,6 +185,9 @@
 				Base,
 			);
 			mainGroup = 847C243D2C7A196A008D723F;
+			packageReferences = (
+				84E91FF32C7BD4AD001F7DC1 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
 			productRefGroup = 847C24472C7A196A008D723F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -491,6 +499,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84E91FF32C7BD4AD001F7DC1 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector.git";
+			requirement = {
+				branch = 0.10.0;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84E91FF42C7BD4AD001F7DC1 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84E91FF32C7BD4AD001F7DC1 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 847C243E2C7A196A008D723F /* Project object */;
 }
