@@ -66,11 +66,14 @@ final class GameControllerTests: XCTestCase {
         validateInitialState(sut: sut)
         
         // When I take a turn
-        sut.takeTurn()
+        sut.takeTurnAt(0)
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
+        XCTAssertEqual(sut.gameBoard[0].state, .x)
     }
+    
+    
     
     // MARK: - Helper Functions
     func validateInitialState(sut: GameController) {

@@ -18,6 +18,12 @@ class Square {
     var state = State.empty
     
     init(index: Int = 0) {
-        self.index = index
+        if index < 0 {
+            self.index = 0
+        } else if index > 8 {
+            self.index = 0
+        } else {
+            self.index = index
+        }
     }
 }

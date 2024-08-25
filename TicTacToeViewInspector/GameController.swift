@@ -12,6 +12,15 @@ class GameController {
     enum Turn {
         case x
         case o
+        
+        var state: Square.State {
+            switch self {
+            case .x:
+                return .x
+            case .o:
+                return .o
+            }
+        }
     }
     
     var currentTurn: Turn = .x
@@ -25,7 +34,8 @@ class GameController {
         currentTurn = currentTurn == .x ? .o : .x
     }
     
-    func takeTurn() {
+    func takeTurnAt(_ index: Int) {
+        gameBoard[index].state = currentTurn.state
         updateTurn()
     }
 }

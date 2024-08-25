@@ -18,7 +18,7 @@ final class SquareTests: XCTestCase {
         XCTAssertEqual(sut.state, .x)
         XCTAssertEqual(sut.index, 0)
     }
-
+    
     func testThatSquareCanBe_O() throws {
         let sut = Square()
         sut.state = .o
@@ -31,4 +31,20 @@ final class SquareTests: XCTestCase {
         XCTAssertEqual(sut.state, .empty)
         XCTAssertEqual(sut.index, 1)
     }
+    
+    func testSquareIndexPropertyBoundaries() {
+        let sut1 = Square(index: -1)
+        XCTAssertEqual(sut1.state, .empty)
+        XCTAssertEqual(sut1.index, 0)
+        
+        let sut2 = Square(index: 9)
+        XCTAssertEqual(sut2.state, .empty)
+        XCTAssertEqual(sut2.index, 0)
+        
+        let sut3 = Square(index: 100)
+        XCTAssertEqual(sut3.state, .empty)
+        XCTAssertEqual(sut3.index, 0)
+    }
+
+    
 }
