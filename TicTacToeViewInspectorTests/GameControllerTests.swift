@@ -72,7 +72,23 @@ final class GameControllerTests: XCTestCase {
         XCTAssertEqual(sut.currentTurn, .o)
         XCTAssertEqual(sut.gameBoard[0].state, .x)
     }
-    
+
+    func testThatYouCantTakeATurnIfItHasBeenPicked() {
+        // Given
+        let sut = GameController()
+        validateInitialState(sut: sut)
+        sut.takeTurnAt(0)
+        XCTAssertEqual(sut.currentTurn, .o)
+        XCTAssertEqual(sut.gameBoard[0].state, .x)
+        
+        // When the user tries to move in an occupied space
+        sut.takeTurnAt(0)
+        
+        // Then, nothing should change or update
+        XCTAssertEqual(sut.currentTurn, .o)
+        XCTAssertEqual(sut.gameBoard[0].state, .x)
+    }
+
     
     
     // MARK: - Helper Functions

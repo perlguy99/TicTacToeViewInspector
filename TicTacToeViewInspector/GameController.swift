@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 class GameController {
     enum Turn {
         case x
@@ -35,6 +34,10 @@ class GameController {
     }
     
     func takeTurnAt(_ index: Int) {
+        let square = gameBoard[index]
+        
+        if square.state != .empty { return }
+        
         gameBoard[index].state = currentTurn.state
         updateTurn()
     }
