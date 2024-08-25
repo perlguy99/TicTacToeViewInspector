@@ -17,6 +17,16 @@ class Square {
     let index: Int
     var state = State.empty
     
+    var squareImageName: String {
+        if state == .x {
+            return "xmark"
+        } else if state == .o {
+            return "circle"
+        } else {
+            return ""
+        }
+    }
+    
     init(index: Int = 0) {
         if index < 0 {
             self.index = 0

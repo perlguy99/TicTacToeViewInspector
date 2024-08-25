@@ -16,19 +16,10 @@ struct SquareView: View {
             .cornerRadius(10)
             .foregroundStyle(.blue)
             .overlay(
-                Text(squareText)
-                    .font(.largeTitle)
+                Image(systemName: square.squareImageName)
+                    .resizable()
+                    .frame(width: 75, height: 75)
             )
-    }
-    
-    var squareText: String {
-        if square.state == .x {
-            return "X"
-        } else if square.state == .o {
-            return "O"
-        } else {
-            return ""
-        }
     }
 }
 
