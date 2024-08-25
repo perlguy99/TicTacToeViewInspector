@@ -25,6 +25,7 @@ class GameController {
     var currentTurn: Turn = .x
     var gameBoard: [Square] = []
     var winner: Square.State?
+    var isDraw = false
     
     init() {
         gameBoard = [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()]
@@ -47,7 +48,8 @@ class GameController {
             // So we do NOT want to call updateTurn()
             winner = currentTurn.state
         } else {
-            // But if no winner, then call updateTurn()
+            // But if no winner, then check for a Draw and call updateTurn()
+            checkForDraw()
             updateTurn()
         }
     }
@@ -68,14 +70,15 @@ class GameController {
             } else if states == [.o, .o, .o] {
                 winner = .o
                 return true
-            } else if states == [.empty, .empty, .empty] {
-                winner = nil
-                return false
-            }
+            } 
         }
         
         return false
     }
     
-    
+    func checkForDraw() {
+        if (!gameBoard.contains { $0.state == .empty }) {
+            isDraw = true
+        }
+    }
 }
