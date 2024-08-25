@@ -24,6 +24,7 @@ class GameController {
     
     var currentTurn: Turn = .x
     var gameBoard: [Square] = []
+    var winner: Square.State?
     
     init() {
         gameBoard = [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()]
@@ -39,6 +40,42 @@ class GameController {
         if square.state != .empty { return }
         
         gameBoard[index].state = currentTurn.state
-        updateTurn()
+        
+        // Before we update the Turn, we need to see if the current player won
+        if checkForWin() {
+            // The current player just won
+            // So we do NOT want to call updateTurn()
+            winner = currentTurn.state
+        } else {
+            // But if no winner, then call updateTurn()
+            updateTurn()
+        }
     }
+    
+    func checkForWin() -> Bool {
+        let winningPatterns: [[Int]] = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6] // diagonals
+        ]
+        
+        for pattern in winningPatterns {
+            let states = pattern.map { gameBoard[$0].state }
+            
+            if states == [.x, .x, .x] {
+                winner = .x
+                return true
+            } else if states == [.o, .o, .o] {
+                winner = .o
+                return true
+            } else if states == [.empty, .empty, .empty] {
+                winner = nil
+                return false
+            }
+        }
+        
+        return false
+    }
+    
+    
 }

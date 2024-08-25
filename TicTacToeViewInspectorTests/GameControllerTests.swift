@@ -88,7 +88,40 @@ final class GameControllerTests: XCTestCase {
         XCTAssertEqual(sut.currentTurn, .o)
         XCTAssertEqual(sut.gameBoard[0].state, .x)
     }
+    
+    
+    func testTakeOneTurnAndCheckForWinner() {
+        // Given
+        let sut = GameController()
+        validateInitialState(sut: sut)
+        
+        // When I take a turn
+        sut.takeTurnAt(0)
+        
+        // Then
+        XCTAssertEqual(sut.currentTurn, .o)
+        XCTAssertEqual(sut.gameBoard[0].state, .x)
+        XCTAssertNil(sut.winner)
+    }
 
+    func testMake_X_WinAndCheckForWinner() {
+        // Given
+        let sut = GameController()
+        validateInitialState(sut: sut)
+        
+        // When X Wins across the top
+        sut.takeTurnAt(0) // X
+        sut.takeTurnAt(4) // O
+        sut.takeTurnAt(1) // X
+        sut.takeTurnAt(3) // O
+        sut.takeTurnAt(2) // X
+        
+        // Then
+        XCTAssertEqual(sut.currentTurn, .x)
+        XCTAssertEqual(sut.winner, .x)
+    }
+    
+    
     
     
     // MARK: - Helper Functions
