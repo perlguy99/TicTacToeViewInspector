@@ -15,7 +15,6 @@ class Square: ObservableObject {
     }
 
     @Published var state = State.empty
-    let index: Int
     var action: () -> Void
     
     var squareImageName: String {
@@ -27,16 +26,8 @@ class Square: ObservableObject {
             return ""
         }
     }
-    
-    init(index: Int = 0, action: @escaping () -> Void = { print("default square action") }) {
-        if index < 0 {
-            self.index = 0
-        } else if index > 8 {
-            self.index = 0
-        } else {
-            self.index = index
-        }
-        
+
+    init(action: @escaping () -> Void = { print("Default Square Action") }) {
         self.action = action
     }
 }

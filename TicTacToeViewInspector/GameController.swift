@@ -33,9 +33,8 @@ class GameController: ObservableObject {
     
     func reset() {
         gameBoard = (0..<9).map { index in
-            Square(index: index) { [unowned self] in
+            Square() { [unowned self] in
                 self.takeTurnAt(index)
-                
             }
         }
         
