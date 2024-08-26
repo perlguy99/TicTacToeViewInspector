@@ -32,8 +32,11 @@ class GameController {
     }
     
     func reset() {
-        gameBoard = (0..<9).map { _ in
-            Square()
+        gameBoard = (0..<9).map { index in
+            Square(index: index) { [unowned self] in
+                self.takeTurnAt(index)
+                
+            }
         }
         
         currentTurn = .x

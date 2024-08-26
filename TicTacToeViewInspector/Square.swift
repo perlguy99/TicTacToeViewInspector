@@ -16,6 +16,7 @@ class Square {
 
     let index: Int
     var state = State.empty
+    var action: () -> Void
     
     var squareImageName: String {
         if state == .x {
@@ -27,7 +28,7 @@ class Square {
         }
     }
     
-    init(index: Int = 0) {
+    init(index: Int = 0, action: @escaping () -> Void = { print("default square action") }) {
         if index < 0 {
             self.index = 0
         } else if index > 8 {
@@ -35,5 +36,7 @@ class Square {
         } else {
             self.index = index
         }
+        
+        self.action = action
     }
 }

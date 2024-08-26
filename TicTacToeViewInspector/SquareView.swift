@@ -18,6 +18,7 @@ struct SquareView: View {
             .overlay(
                 Image(systemName: square.squareImageName)
                     .resizable()
+                    .scaledToFit()
                     .frame(width: 75, height: 75)
             )
             .tag("SquareView.Rectangle")
