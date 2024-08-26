@@ -23,8 +23,7 @@ struct SquareView: View {
             )
             .tag("SquareView.Rectangle")
             .onTapGesture {
-                // Call the controller's takeTurnAt() function
-                square.action()
+                square.action() // GameController's takeTurnAt() function
             }
     }
 }
