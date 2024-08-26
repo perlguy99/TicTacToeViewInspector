@@ -12,6 +12,9 @@ struct GameBoardView: View {
     
     var body: some View {
         VStack {
+            Text(controller.gameHeaderTitle)
+                .font(.title)
+            
             HStack {
                 SquareView(square: controller.gameBoard[0])
                 SquareView(square: controller.gameBoard[1])
@@ -27,6 +30,13 @@ struct GameBoardView: View {
                 SquareView(square: controller.gameBoard[7])
                 SquareView(square: controller.gameBoard[8])
             }
+            
+            Button("Play Again?") {
+                controller.reset()
+            }
+            .buttonStyle(.bordered)
+            .opacity(controller.winner == nil && !controller.isDraw ? 0 : 1)
+            .disabled(controller.winner == nil && !controller.isDraw)
         }
     }
 }

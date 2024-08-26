@@ -20,12 +20,41 @@ class GameController: ObservableObject {
                 return .o
             }
         }
+
+        var turnString: String {
+            switch self {
+            case .x:
+                return "It's X's turn"
+            case .o:
+                return "It's O's turn"
+            }
+        }
     }
     
     @Published var currentTurn: Turn = .x
     @Published var gameBoard: [Square] = []
     @Published var winner: Square.State?
     @Published var isDraw = false
+    
+    
+    var gameHeaderTitle: String {
+        var returnString = "DEFAULT"
+
+        if let winner = winner {
+            returnString = "Winner: "
+            if winner == .x {
+                returnString += "X"
+            } else if winner == .o {
+                returnString += "O"
+            }
+        } else if isDraw {
+            returnString = "DRAW"
+        } else {
+            returnString = currentTurn.turnString
+        }
+        
+        return returnString
+    }
     
     init() {
         self.reset()
