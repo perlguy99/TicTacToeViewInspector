@@ -21,6 +21,12 @@ struct SquareView: View {
                     .frame(width: 75, height: 75)
             )
             .tag("SquareView.Rectangle")
+            .onTapGesture {
+                // When square is tapped...
+                // we need to call the controller's takeTurnAt() function
+                
+                
+            }
     }
 }
 

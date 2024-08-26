@@ -28,11 +28,21 @@ class GameController {
     var isDraw = false
     
     init() {
-        gameBoard = [Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square(), Square()]
+        self.reset()
+    }
+    
+    func reset() {
+        gameBoard = (0..<9).map { _ in
+            Square()
+        }
+        
+        currentTurn = .x
+        winner = nil
+        isDraw = false
     }
     
     func updateTurn() {
-        currentTurn = currentTurn == .x ? .o : .x
+        currentTurn = (currentTurn == .x ? .o : .x)
     }
     
     func takeTurnAt(_ index: Int) {

@@ -484,11 +484,30 @@ final class GameControllerTests: XCTestCase {
         XCTAssertTrue(sut.isDraw)
     }
     
+    func testGameControllerReset() {
+        // Given
+        let sut = GameController()
+        validateInitialState(sut: sut)
+
+        sut.updateTurn()
+        XCTAssertEqual(sut.currentTurn, .o)
+
+        // When
+        sut.reset()
+        
+        // Then
+        validateInitialState(sut: sut)
+    }
+    
     
     // MARK: - Helper Functions
     func validateInitialState(sut: GameController) {
         XCTAssertEqual(sut.currentTurn, .x)
         XCTAssertEqual(sut.gameBoard.count, 9)
+        XCTAssertNil(sut.winner)
+        XCTAssertFalse(sut.isDraw)
+        
+        validateEmptyGameBoard(sut: sut)
     }
     
     func validateEmptyGameBoard(sut: GameController) {
