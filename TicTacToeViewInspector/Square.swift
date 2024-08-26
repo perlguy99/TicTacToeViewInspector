@@ -7,15 +7,15 @@
 
 import Foundation
 
-class Square {
+class Square: ObservableObject {
     enum State {
         case empty
         case x
         case o
     }
 
+    @Published var state = State.empty
     let index: Int
-    var state = State.empty
     var action: () -> Void
     
     var squareImageName: String {

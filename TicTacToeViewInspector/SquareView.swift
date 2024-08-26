@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SquareView: View {
-    let square: Square
+    @ObservedObject var square: Square
     
     var body: some View {
         Rectangle()
@@ -23,10 +23,8 @@ struct SquareView: View {
             )
             .tag("SquareView.Rectangle")
             .onTapGesture {
-                // When square is tapped...
-                // we need to call the controller's takeTurnAt() function
-                
-                
+                // Call the controller's takeTurnAt() function
+                square.action()
             }
     }
 }

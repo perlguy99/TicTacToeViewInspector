@@ -42,11 +42,4 @@ final class SquareViewTests: XCTestCase {
         XCTAssertNotEqual(try displayedImage.name(), try! stateXImage.name())
         XCTAssertEqual(try displayedImage.name(), try! stateOImage.name())
     }
-    
-    func testWhenSquareIsTappedItUpdatesProperly() {
-        let sut = SquareView(square: Square())
-        
-        
-    }
-
 }

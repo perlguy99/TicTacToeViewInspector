@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GameController {
+class GameController: ObservableObject {
     enum Turn {
         case x
         case o
@@ -22,10 +22,10 @@ class GameController {
         }
     }
     
-    var currentTurn: Turn = .x
-    var gameBoard: [Square] = []
-    var winner: Square.State?
-    var isDraw = false
+    @Published var currentTurn: Turn = .x
+    @Published var gameBoard: [Square] = []
+    @Published var winner: Square.State?
+    @Published var isDraw = false
     
     init() {
         self.reset()

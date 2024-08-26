@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameBoardView: View {
-    let controller = GameController()
+    @ObservedObject var controller = GameController()
     
     var body: some View {
         VStack {

@@ -12,7 +12,7 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertNoThrow(GameBoardView())
     }
 
-    func testThatWhenITapASquareItChangesTo_X() {
+    func testTakeTurnAtUpdatesProperSquareState_X() {
         // Given I have a GameBoardView
         let sut = GameBoardView()
         XCTAssertEqual(sut.controller.gameBoard[0].state, .empty)
@@ -24,7 +24,7 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertEqual(sut.controller.gameBoard[0].state, .x)
     }
 
-    func testThatWhenITapASquareItChangesTo_O() {
+    func testTakeTurnAtUpdatesProperSquareState_O() {
         // Given I have a GameBoardView
         let sut = GameBoardView()
         XCTAssertEqual(sut.controller.gameBoard[0].state, .empty)
@@ -36,6 +36,17 @@ final class GameBoardViewTests: XCTestCase {
         // Then
         sut.controller.takeTurnAt(1) // O
         XCTAssertEqual(sut.controller.gameBoard[1].state, .o)
+    }
+    
+    func testSquareCallback() throws {
+        // Given that I have a Game Board
+        let sut = GameBoardView()
+        
+        // When I call a Square's Action
+        sut.controller.gameBoard[0].action()
+
+        // Then
+        XCTAssertEqual(sut.controller.gameBoard[0].state, .x)
     }
 
 }
