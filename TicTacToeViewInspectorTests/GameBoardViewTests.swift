@@ -22,6 +22,9 @@ final class GameBoardViewTests: XCTestCase {
         
         // Then
         XCTAssertEqual(sut.controller.gameBoard[0].state, .x)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
 
     func testTakeTurnAtUpdatesProperSquareState_O() {
@@ -36,6 +39,9 @@ final class GameBoardViewTests: XCTestCase {
         // Then
         sut.controller.takeTurnAt(1) // O
         XCTAssertEqual(sut.controller.gameBoard[1].state, .o)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
     
     func testSquareCallback() throws {
@@ -90,17 +96,8 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertEqual(try displayedText(), testXwin)
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
         
-        
-        
-//        
-//        let square = Square()
-//        square.state = .x
-//        let sut = SquareView(square: square)
-//        
-//        let displayedImage = try sut.inspect().find(viewWithTag: "SquareView.Rectangle").overlay().image().actualImage()
-//        XCTAssertNotEqual(try displayedImage.name(), try! stateEmptyImage.name())
-//        XCTAssertEqual(try displayedImage.name(), try! stateXImage.name())
-//        XCTAssertNotEqual(try displayedImage.name(), try! stateOImage.name())
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
 
     
@@ -131,6 +128,9 @@ final class GameBoardViewTests: XCTestCase {
         
         XCTAssertEqual(try displayedText(), testXwin)
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
     
     func testGameBoardTitle_ForceXWin() throws {
@@ -148,6 +148,9 @@ final class GameBoardViewTests: XCTestCase {
 
         sut.controller.winner = .x
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
     
     func testGameBoardTitle_ForceOWin() throws {
@@ -165,6 +168,9 @@ final class GameBoardViewTests: XCTestCase {
 
         sut.controller.winner = .o
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
     
     func testGameBoardTitle_ForceDraw() throws {
@@ -182,6 +188,9 @@ final class GameBoardViewTests: XCTestCase {
 
         sut.controller.isDraw = true
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
     
     // TODO: - Need to write tests for actual squares
@@ -219,6 +228,9 @@ final class GameBoardViewTests: XCTestCase {
     func verifyAllNineSquaresForCorrectState(gameBoardView: GameBoardView) throws {
         for (index, square) in gameBoardView.controller.gameBoard.enumerated() {
             let displayedImageName = try getDisplayedImageForSquare(square).name()
+            
+            print("At index \(index): \(displayedImageName) should be: \(square.squareImageName)")
+            
             XCTAssertEqual(
                 displayedImageName,
                 square.squareImageName,
@@ -226,6 +238,5 @@ final class GameBoardViewTests: XCTestCase {
             )
         }
     }
-
 }
 
