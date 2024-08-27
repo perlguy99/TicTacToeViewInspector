@@ -13,6 +13,8 @@ class GameController: ObservableObject {
     @Published var winner: Square.State?
     @Published var isDraw = false
     
+    var gameOver = false
+    
     var gameHeaderTitle: String {
         var returnString = "DEFAULT"
 
@@ -46,6 +48,7 @@ class GameController: ObservableObject {
         currentTurn = .x
         winner = nil
         isDraw = false
+        gameOver = false
     }
     
     func updateTurn() {
@@ -83,9 +86,11 @@ class GameController: ObservableObject {
             
             if states == [.x, .x, .x] {
                 winner = .x
+                gameOver = true
                 return true
             } else if states == [.o, .o, .o] {
                 winner = .o
+                gameOver = true
                 return true
             } 
         }
@@ -95,6 +100,7 @@ class GameController: ObservableObject {
     
     func checkForDraw() {
         if (!gameBoard.contains { $0.state == .empty }) {
+            gameOver = true
             isDraw = true
         }
     }

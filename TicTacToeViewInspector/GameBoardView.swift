@@ -35,8 +35,7 @@ struct GameBoardView: View {
             }
             
             // Disable when there is a winner.
-            
-            .disabled(controller.winner == nil && controller.isDraw)
+            .disabled(controller.gameOver)
             
             Button("Play Again?") {
                 controller.reset()
