@@ -8,11 +8,11 @@
 import SwiftUI
 
 class GameController: ObservableObject {
-    var currentTurn: Turn = .x
-    var gameBoard: [Square] = []
     @Published var winner: Square.State?
     @Published var isDraw = false
-    
+
+    var currentTurn: Turn = .x
+    var gameBoard: [Square] = []
     var gameOver = false
     
     var gameHeaderTitle: String {
