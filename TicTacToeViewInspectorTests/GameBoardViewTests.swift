@@ -217,20 +217,15 @@ final class GameBoardViewTests: XCTestCase {
     
     // And now test ALL 9 squares at once
     func verifyAllNineSquaresForCorrectState(gameBoardView: GameBoardView) throws {
-        // Using the GameBoard passed in...
-        
-        // All 9 should have no image currently
-        // Expecting this to fail
-        for index in 0...8 {
-            let square = gameBoardView.controller.gameBoard[index]
-            let displayedImage = try getDisplayedImageForSquare(square)
-            let displayedImageName = try displayedImage.name()
-            let squareStateImageName = square.squareImageName
-            
-            XCTAssertEqual(displayedImageName, squareStateImageName, "At index \(index): \(displayedImageName) does not match: \(squareStateImageName)")
+        for (index, square) in gameBoardView.controller.gameBoard.enumerated() {
+            let displayedImageName = try getDisplayedImageForSquare(square).name()
+            XCTAssertEqual(
+                displayedImageName,
+                square.squareImageName,
+                "At index \(index): \(displayedImageName) does not match \(square.squareImageName)"
+            )
         }
-        
     }
-    
+
 }
 
