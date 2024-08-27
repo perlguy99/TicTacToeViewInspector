@@ -9,7 +9,7 @@ import SwiftUI
 
 class GameController: ObservableObject {
     var currentTurn: Turn = .x
-    @Published var gameBoard: [Square] = []
+    var gameBoard: [Square] = []
     @Published var winner: Square.State?
     @Published var isDraw = false
     

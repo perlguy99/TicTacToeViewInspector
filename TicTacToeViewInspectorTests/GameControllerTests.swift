@@ -89,7 +89,6 @@ final class GameControllerTests: XCTestCase {
         XCTAssertEqual(sut.gameBoard[0].state, .x)
     }
     
-    
     func testTakeOneTurnAndCheckForWinner() {
         // Given
         let sut = GameController()

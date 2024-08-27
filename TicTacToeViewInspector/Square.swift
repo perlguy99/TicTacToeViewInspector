@@ -15,6 +15,7 @@ class Square: ObservableObject {
     }
 
     @Published var state = State.empty
+//    var state = State.empty
     var action: () -> Void
     
     var squareImageName: String {
