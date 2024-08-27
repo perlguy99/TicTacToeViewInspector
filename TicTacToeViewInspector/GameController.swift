@@ -8,8 +8,22 @@
 import SwiftUI
 
 class GameController: ObservableObject {
-    @Published var winner: Square.State?
-    @Published var isDraw = false
+    // This on must be @Published
+    @Published var winner: Square.State? {
+        didSet {
+            if winner != nil {
+                gameOver = true
+            }
+        }
+    }
+//    @Published var isDraw = false
+    var isDraw = false {
+        didSet {
+            if isDraw {
+                gameOver = true
+            }
+        }
+    }
 
     var currentTurn: Turn = .x
     var gameBoard: [Square] = []
@@ -18,15 +32,17 @@ class GameController: ObservableObject {
     var gameHeaderTitle: String {
         var returnString = "DEFAULT"
 
-        if let winner = winner {
-            returnString = "Winner: "
-            if winner == .x {
-                returnString += "X"
-            } else if winner == .o {
-                returnString += "O"
+        if gameOver {
+            if let winner = winner {
+                returnString = "Winner: "
+                if winner == .x {
+                    returnString += "X"
+                } else if winner == .o {
+                    returnString += "O"
+                }
+            } else {
+                returnString = "DRAW"
             }
-        } else if isDraw {
-            returnString = "DRAW"
         } else {
             returnString = currentTurn.turnString
         }

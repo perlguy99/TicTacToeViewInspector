@@ -42,8 +42,10 @@ struct GameBoardView: View {
             }
             .tag("PlayAgainButton")
             .buttonStyle(.bordered)
-            .opacity(controller.winner == nil && !controller.isDraw ? 0 : 1)
-            .disabled(controller.winner == nil && !controller.isDraw)
+            .opacity(controller.gameOver ? 1 : 0)
+            .disabled(!controller.gameOver)
+//            .opacity(controller.winner == nil && !controller.isDraw ? 0 : 1)
+//            .disabled(controller.winner == nil && !controller.isDraw)
         }
     }
 }
