@@ -8,34 +8,10 @@
 import SwiftUI
 
 class GameController: ObservableObject {
-    enum Turn {
-        case x
-        case o
-        
-        var state: Square.State {
-            switch self {
-            case .x:
-                return .x
-            case .o:
-                return .o
-            }
-        }
-
-        var turnString: String {
-            switch self {
-            case .x:
-                return "It's X's turn"
-            case .o:
-                return "It's O's turn"
-            }
-        }
-    }
-    
     @Published var currentTurn: Turn = .x
     @Published var gameBoard: [Square] = []
     @Published var winner: Square.State?
     @Published var isDraw = false
-    
     
     var gameHeaderTitle: String {
         var returnString = "DEFAULT"
@@ -120,6 +96,32 @@ class GameController: ObservableObject {
     func checkForDraw() {
         if (!gameBoard.contains { $0.state == .empty }) {
             isDraw = true
+        }
+    }
+}
+
+// Moved this here to make the GameController clearer
+extension GameController {
+    enum Turn {
+        case x
+        case o
+        
+        var state: Square.State {
+            switch self {
+            case .x:
+                return .x
+            case .o:
+                return .o
+            }
+        }
+
+        var turnString: String {
+            switch self {
+            case .x:
+                return "It's X's turn"
+            case .o:
+                return "It's O's turn"
+            }
         }
     }
 }

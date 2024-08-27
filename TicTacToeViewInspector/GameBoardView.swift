@@ -13,27 +13,35 @@ struct GameBoardView: View {
     var body: some View {
         VStack {
             Text(controller.gameHeaderTitle)
+                .tag("GameBoardViewTitle")
                 .font(.title)
             
-            HStack {
-                SquareView(square: controller.gameBoard[0])
-                SquareView(square: controller.gameBoard[1])
-                SquareView(square: controller.gameBoard[2])
+            Group {
+                HStack {
+                    SquareView(square: controller.gameBoard[0])
+                    SquareView(square: controller.gameBoard[1])
+                    SquareView(square: controller.gameBoard[2])
+                }
+                HStack {
+                    SquareView(square: controller.gameBoard[3])
+                    SquareView(square: controller.gameBoard[4])
+                    SquareView(square: controller.gameBoard[5])
+                }
+                HStack {
+                    SquareView(square: controller.gameBoard[6])
+                    SquareView(square: controller.gameBoard[7])
+                    SquareView(square: controller.gameBoard[8])
+                }
             }
-            HStack {
-                SquareView(square: controller.gameBoard[3])
-                SquareView(square: controller.gameBoard[4])
-                SquareView(square: controller.gameBoard[5])
-            }
-            HStack {
-                SquareView(square: controller.gameBoard[6])
-                SquareView(square: controller.gameBoard[7])
-                SquareView(square: controller.gameBoard[8])
-            }
+            
+            // Disable when there is a winner.
+            
+            .disabled(controller.winner == nil && controller.isDraw)
             
             Button("Play Again?") {
                 controller.reset()
             }
+            .tag("PlayAgainButton")
             .buttonStyle(.bordered)
             .opacity(controller.winner == nil && !controller.isDraw ? 0 : 1)
             .disabled(controller.winner == nil && !controller.isDraw)
