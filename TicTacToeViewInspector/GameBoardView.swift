@@ -35,17 +35,15 @@ struct GameBoardView: View {
             }
             
             // Disable when there is a winner.
-            .disabled(controller.gameOver)
+            .disabled(controller.gameResult != .inProgress)
             
             Button("Play Again?") {
                 controller.reset()
             }
             .tag("PlayAgainButton")
             .buttonStyle(.bordered)
-            .opacity(controller.gameOver ? 1 : 0)
-            .disabled(!controller.gameOver)
-//            .opacity(controller.winner == nil && !controller.isDraw ? 0 : 1)
-//            .disabled(controller.winner == nil && !controller.isDraw)
+            .opacity(controller.gameResult == .inProgress ? 0 : 1)
+            .disabled(controller.gameResult != .inProgress)
         }
     }
 }

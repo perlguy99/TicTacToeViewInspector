@@ -124,7 +124,7 @@ final class GameBoardViewTests: XCTestCase {
         sut.controller.takeTurnAt(1) // X
         
         // Force .x as the winner
-        sut.controller.winner = .x
+        sut.controller.gameResult = .winner(.x)
         
         XCTAssertEqual(try displayedText(), testXwin)
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
@@ -146,7 +146,7 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertEqual(try displayedText(), testXturn)
         XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
 
-        sut.controller.winner = .x
+        sut.controller.gameResult = .winner(.x)
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
         
         // Also, verify that all SquareViews are displaying the proper image, if any.
@@ -166,7 +166,7 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertEqual(try displayedText(), testXturn)
         XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
 
-        sut.controller.winner = .o
+        sut.controller.gameResult = .winner(.o)
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
         
         // Also, verify that all SquareViews are displaying the proper image, if any.
@@ -186,7 +186,7 @@ final class GameBoardViewTests: XCTestCase {
         XCTAssertEqual(try displayedText(), testXturn)
         XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
 
-        sut.controller.isDraw = true
+        sut.controller.gameResult = .draw
         XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
         
         // Also, verify that all SquareViews are displaying the proper image, if any.

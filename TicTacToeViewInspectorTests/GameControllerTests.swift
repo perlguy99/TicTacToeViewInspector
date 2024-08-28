@@ -100,8 +100,7 @@ final class GameControllerTests: XCTestCase {
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
         XCTAssertEqual(sut.gameBoard[0].state, .x)
-        XCTAssertNil(sut.winner)
-        XCTAssertFalse(sut.gameOver)
+        XCTAssertEqual(sut.gameResult, .inProgress)
     }
 
     // MARK: - X
@@ -112,19 +111,19 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins across the top
         sut.takeTurnAt(0) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // X
         
-        // Then
+        // Then X Wins!
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     func testForWin_Expect_X_Row2() {
@@ -134,19 +133,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins across row 2
         sut.takeTurnAt(3) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     func testForWin_Expect_X_Row3() {
@@ -156,19 +154,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins across row 3
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(7) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     func testForWin_Expect_X_Col1() {
@@ -178,19 +175,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins in 1st column
         sut.takeTurnAt(0) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
     
     func testForWin_Expect_X_Col2() {
@@ -200,19 +196,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins across the top
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(7) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     func testForWin_Expect_X_Col3() {
@@ -222,19 +217,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins across the top
         sut.takeTurnAt(2) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
     
     func testForWin_Expect_X_Diagonal1() {
@@ -244,19 +238,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins diagonally, top left to bottom right
         sut.takeTurnAt(0) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     func testForWin_Expect_X_Diagonal2() {
@@ -266,19 +259,18 @@ final class GameControllerTests: XCTestCase {
         
         // When X Wins diagonally, top right to bottom left
         sut.takeTurnAt(2) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
         
         // Then
         XCTAssertEqual(sut.currentTurn, .x)
-        XCTAssertEqual(sut.winner, .x)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut)
     }
 
     // MARK: - O
@@ -289,21 +281,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins across the top
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
 
     func testForWin_Expect_O_Row2() {
@@ -313,21 +304,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins across row 2
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
     
     func testForWin_Expect_O_Row3() {
@@ -337,21 +327,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins across row 3
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(7) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
 
     func testForWin_Expect_O_Col1() {
@@ -361,21 +350,20 @@ final class GameControllerTests: XCTestCase {
         
         // When 0 Wins in 1st column
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
     
     func testForWin_Expect_O_Col2() {
@@ -385,21 +373,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins in 2nd column
         sut.takeTurnAt(2) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(7) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
 
     func testForWin_Expect_O_Col3() {
@@ -409,21 +396,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins in 3rd column
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
 
     func testForWin_Expect_O_Diagonal1() {
@@ -433,21 +419,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins diagonally, top left to bottom right
         sut.takeTurnAt(3) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
 
     func testForWin_Expect_O_Diagonal2() {
@@ -457,21 +442,20 @@ final class GameControllerTests: XCTestCase {
         
         // When O Wins diagonally, top right to bottom left
         sut.takeTurnAt(5) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // O
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // O
         
         // Then
         XCTAssertEqual(sut.currentTurn, .o)
-        XCTAssertEqual(sut.winner, .o)
-        XCTAssertTrue(sut.gameOver)
+        checkWinner(sut: sut, forState: .o)
     }
     
     // MARK: - Draw
@@ -479,32 +463,31 @@ final class GameControllerTests: XCTestCase {
         let sut = GameController()
         validateInitialState(sut: sut)
         
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(1) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(0) // O
 
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(5) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(2) // O
 
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(4) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(3) // O
 
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(6) // X
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(7) // O
 
-        XCTAssertNil(sut.winner)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         sut.takeTurnAt(8) // X
         
-        XCTAssertNil(sut.winner)
-        XCTAssertTrue(sut.isDraw)
-        XCTAssertTrue(sut.gameOver)
+        XCTAssertEqual(sut.gameResult, .draw)
+        checkDraw(sut: sut)
     }
     
     func testGameControllerReset() {
@@ -544,7 +527,7 @@ final class GameControllerTests: XCTestCase {
     
     func testGameHeaderTitleWhen_X_Wins2() {
         let sut = GameController()
-        sut.winner = .x
+        sut.gameResult = .winner(.x)
         
         // X Won
         XCTAssertEqual(sut.gameHeaderTitle, "Winner: X")
@@ -565,7 +548,7 @@ final class GameControllerTests: XCTestCase {
 
     func testGameHeaderTitleWhen_O_Wins2() {
         let sut = GameController()
-        sut.winner = .o
+        sut.gameResult = .winner(.o)
         
         // O Won
         XCTAssertEqual(sut.gameHeaderTitle, "Winner: O")
@@ -591,7 +574,7 @@ final class GameControllerTests: XCTestCase {
 
     func testGameHeaderTitleWhen_Draw2() {
         let sut = GameController()
-        sut.isDraw = true
+        sut.gameResult = .draw
 
         // DRAW
         XCTAssertEqual(sut.gameHeaderTitle, "DRAW")
@@ -599,12 +582,22 @@ final class GameControllerTests: XCTestCase {
     
     
     // MARK: - Helper Functions
+    func checkWinner(sut: GameController, forState state: Square.State = .x) {
+        if case .winner(let winner) = sut.gameResult {
+            XCTAssertEqual(winner, state, "The winner should be \(state).")
+        } else {
+            XCTFail("The game result should be a winner, but it was \(sut.gameResult).")
+        }
+    }
+    
+    func checkDraw(sut: GameController) {
+        return XCTAssertTrue(sut.gameResult == .draw)
+    }
+
     func validateInitialState(sut: GameController) {
         XCTAssertEqual(sut.currentTurn, .x)
         XCTAssertEqual(sut.gameBoard.count, 9)
-        XCTAssertNil(sut.winner)
-        XCTAssertFalse(sut.isDraw)
-        XCTAssertFalse(sut.gameOver)
+        XCTAssertEqual(sut.gameResult, .inProgress)
         
         validateEmptyGameBoard(sut: sut)
     }

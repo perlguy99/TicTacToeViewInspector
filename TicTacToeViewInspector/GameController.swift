@@ -8,46 +8,20 @@
 import SwiftUI
 
 class GameController: ObservableObject {
-    // This on must be @Published
-    @Published var winner: Square.State? {
-        didSet {
-            if winner != nil {
-                gameOver = true
-            }
-        }
-    }
-//    @Published var isDraw = false
-    var isDraw = false {
-        didSet {
-            if isDraw {
-                gameOver = true
-            }
-        }
-    }
+    @Published var gameResult: GameResult = .inProgress
 
     var currentTurn: Turn = .x
     var gameBoard: [Square] = []
-    var gameOver = false
     
     var gameHeaderTitle: String {
-        var returnString = "DEFAULT"
-
-        if gameOver {
-            if let winner = winner {
-                returnString = "Winner: "
-                if winner == .x {
-                    returnString += "X"
-                } else if winner == .o {
-                    returnString += "O"
-                }
-            } else {
-                returnString = "DRAW"
-            }
-        } else {
-            returnString = currentTurn.turnString
+        switch gameResult {
+        case .inProgress:
+            return currentTurn.turnString
+        case .winner(let winner):
+            return "Winner: \(winner == .x ? "X" : "O")"
+        case .draw:
+            return "DRAW"
         }
-        
-        return returnString
     }
     
     init() {
@@ -62,9 +36,7 @@ class GameController: ObservableObject {
         }
         
         currentTurn = .x
-        winner = nil
-        isDraw = false
-        gameOver = false
+        gameResult = .inProgress
     }
     
     func updateTurn() {
@@ -73,19 +45,16 @@ class GameController: ObservableObject {
     
     func takeTurnAt(_ index: Int) {
         let square = gameBoard[index]
-        
         if square.state != .empty { return }
         
         gameBoard[index].state = currentTurn.state
         
         // Before we update the Turn, we need to see if the current player won
         if checkForWin() {
-            // The current player just won
-            // So we do NOT want to call updateTurn()
-            winner = currentTurn.state
+            gameResult = .winner(currentTurn.state)
+        } else if checkForDraw() {
+            gameResult = .draw
         } else {
-            // But if no winner, then check for a Draw and call updateTurn()
-            checkForDraw()
             updateTurn()
         }
     }
@@ -101,12 +70,8 @@ class GameController: ObservableObject {
             let states = pattern.map { gameBoard[$0].state }
             
             if states == [.x, .x, .x] {
-                winner = .x
-                gameOver = true
                 return true
             } else if states == [.o, .o, .o] {
-                winner = .o
-                gameOver = true
                 return true
             } 
         }
@@ -114,15 +79,20 @@ class GameController: ObservableObject {
         return false
     }
     
-    func checkForDraw() {
-        if (!gameBoard.contains { $0.state == .empty }) {
-            gameOver = true
-            isDraw = true
-        }
+    func checkForDraw() -> Bool {
+        return  !gameBoard.contains { $0.state == .empty }
     }
 }
 
 // Moved this here to make the GameController clearer
+extension GameController {
+    enum GameResult: Equatable {
+        case winner(Square.State)
+        case draw
+        case inProgress
+    }
+}
+
 extension GameController {
     enum Turn {
         case x
