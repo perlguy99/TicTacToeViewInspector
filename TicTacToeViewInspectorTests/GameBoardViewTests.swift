@@ -291,5 +291,36 @@ final class GameBoardViewTests: XCTestCase {
             )
         }
     }
+    
+    /// Passes whether `currentTurn` is `@Published` or not.
+    /// But, when NOT `@Published`, the headerTitle doesn't display correctly.
+    func testGameBoardTitleIsCorrect_Q1a() throws {
+        // Given that I have a Game Board
+        let sut = GameBoardView()
+        
+        let displayedText = { try sut.inspect().find(viewWithTag: "GameBoardViewTitle").text().string() }
+        
+        XCTAssertEqual(try displayedText(), "It's X's turn")
+        sut.controller.takeTurnAt(0) // X
+        XCTAssertEqual(try displayedText(), "It's O's turn")
+    }
+
+    /// Passes whether `currentTurn` is `@Published` or not.
+    /// /// But, when NOT `@Published`, the headerTitle doesn't display correctly.
+    func testGameBoardTitleIsCorrect_MoreViewInspector_Q1b() throws {
+        // Given that I have a Game Board
+        var sut = GameBoardView()
+        
+        let exp = sut.on(\.didAppear) { view in
+            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's X's turn")
+            try view.actualView().controller.takeTurnAt(0)
+            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's O's turn")
+        }
+        
+        ViewHosting.host(view: sut)
+        wait(for: [exp], timeout: 0.1)
+    }
+    
+    
 }
 

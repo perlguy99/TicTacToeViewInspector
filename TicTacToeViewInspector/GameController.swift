@@ -9,8 +9,8 @@ import SwiftUI
 
 class GameController: ObservableObject {
     @Published var gameResult: GameResult = .inProgress
-    var currentTurn: Turn = .x
-
+    @Published var currentTurn: Turn = .x
+    
     var gameBoard: [Square] = []
     
     var gameHeaderTitle: String {
