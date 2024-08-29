@@ -66,17 +66,10 @@ class GameController: ObservableObject {
             [0, 4, 8], [2, 4, 6] // diagonals
         ]
         
-        for pattern in winningPatterns {
+        return winningPatterns.contains { pattern in
             let states = pattern.map { gameBoard[$0].state }
-            
-            if states == [.x, .x, .x] {
-                return true
-            } else if states == [.o, .o, .o] {
-                return true
-            } 
+            return states == [.x, .x, .x] || states == [.o, .o, .o]
         }
-        
-        return false
     }
     
     func checkForDraw() -> Bool {
