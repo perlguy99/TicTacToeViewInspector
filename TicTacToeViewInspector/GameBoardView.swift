@@ -10,6 +10,8 @@ import SwiftUI
 struct GameBoardView: View {
     @ObservedObject var controller = GameController()
     
+    internal var didAppear: ((Self) -> Void)?
+    
     var body: some View {
         VStack {
             Text(controller.gameHeaderTitle)
@@ -33,7 +35,6 @@ struct GameBoardView: View {
                     SquareView(square: controller.gameBoard[8])
                 }
             }
-            
             // Disable when there is a winner.
             .disabled(controller.gameResult != .inProgress)
             
@@ -41,10 +42,11 @@ struct GameBoardView: View {
                 controller.reset()
             }
             .tag("PlayAgainButton")
-            .buttonStyle(.bordered)
+            .buttonStyle(.borderedProminent)
             .opacity(controller.gameResult == .inProgress ? 0 : 1)
-            .disabled(controller.gameResult != .inProgress)
+            .disabled(controller.gameResult == .inProgress)
         }
+        .onAppear { self.didAppear?(self) }
     }
 }
 

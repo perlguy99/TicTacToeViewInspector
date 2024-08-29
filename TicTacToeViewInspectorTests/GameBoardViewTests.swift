@@ -60,7 +60,60 @@ final class GameBoardViewTests: XCTestCase {
     let testXwin = "Winner: X"
     let testOwin = "Winner: O"
     let testDraw = "DRAW"
+
     
+    /// Views using `@ObservedObject`
+    ///
+    /// `ViewInspector` provides full support for such views, so you can inspect them without any intervention in the source code.
+    ///
+    /// Unlike the views using `@State`,` @Environment` or `@EnvironmentObject`, the state changes inside `@Binding` and `@ObservedObject` can be evaluated with synchronous tests. You may consider, however, using the asynchronous approach described below, just for the sake of the tests consistency.
+    func testGameBoardTitleIsCorrect_MoreViewInspector() throws {
+        // Given that I have a Game Board
+        var sut = GameBoardView()
+        
+//        // 🤯 🤓 Automatically updates each time it is called!
+//        let displayedText = { try sut.inspect().find(viewWithTag: "GameBoardViewTitle").text().string() }
+//        
+//        // Is the Play Again Button displayed?
+//        let playAgainButtonOpacity = { try sut.inspect().find(viewWithTag: "PlayAgainButton").opacity() }
+
+        let exp = sut.on(\.didAppear) { view in
+            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's X's turn")
+            try view.actualView().controller.takeTurnAt(0)
+            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's O's turn")
+            
+        }
+        
+        ViewHosting.host(view: sut)
+        wait(for: [exp], timeout: 0.1)
+        
+        
+//        XCTAssertEqual(try displayedText(), testXturn)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+//        sut.controller.takeTurnAt(0) // X
+//        
+//        XCTAssertEqual(try displayedText(), testOturn)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+//        sut.controller.takeTurnAt(3) // O
+//        
+//        XCTAssertEqual(try displayedText(), testXturn)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+//        sut.controller.takeTurnAt(1) // X
+//        
+//        XCTAssertEqual(try displayedText(), testOturn)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+//        sut.controller.takeTurnAt(4) // O
+//        
+//        XCTAssertEqual(try displayedText(), testXturn)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+//        sut.controller.takeTurnAt(2) // X Wins
+//        
+//        XCTAssertEqual(try displayedText(), testXwin)
+//        XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+//        
+        // Also, verify that all SquareViews are displaying the proper image, if any.
+        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
+    }
     
     
     func testGameBoardTitleIsCorrect() throws {
