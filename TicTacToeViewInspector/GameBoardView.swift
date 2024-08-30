@@ -10,7 +10,7 @@ import SwiftUI
 struct GameBoardView: View {
     @ObservedObject var controller = GameController()
     
-    internal var didAppear: ((Self) -> Void)?
+    internal let inspection = Inspection<Self>()
     
     var body: some View {
         VStack {
@@ -46,7 +46,7 @@ struct GameBoardView: View {
             .opacity(controller.gameResult == .inProgress ? 0 : 1)
             .disabled(controller.gameResult == .inProgress)
         }
-        .onAppear { self.didAppear?(self) }
+        .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
 }
 

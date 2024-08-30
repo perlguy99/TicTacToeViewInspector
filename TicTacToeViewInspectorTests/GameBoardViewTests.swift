@@ -67,53 +67,53 @@ final class GameBoardViewTests: XCTestCase {
     /// `ViewInspector` provides full support for such views, so you can inspect them without any intervention in the source code.
     ///
     /// Unlike the views using `@State`,` @Environment` or `@EnvironmentObject`, the state changes inside `@Binding` and `@ObservedObject` can be evaluated with synchronous tests. You may consider, however, using the asynchronous approach described below, just for the sake of the tests consistency.
-    func testGameBoardTitleIsCorrect_MoreViewInspector() throws {
-        // Given that I have a Game Board
-        var sut = GameBoardView()
-        
-//        // 🤯 🤓 Automatically updates each time it is called!
-//        let displayedText = { try sut.inspect().find(viewWithTag: "GameBoardViewTitle").text().string() }
+//    func testGameBoardTitleIsCorrect_MoreViewInspector() throws {
+//        // Given that I have a Game Board
+//        var sut = GameBoardView()
 //        
-//        // Is the Play Again Button displayed?
-//        let playAgainButtonOpacity = { try sut.inspect().find(viewWithTag: "PlayAgainButton").opacity() }
-
-        let exp = sut.on(\.didAppear) { view in
-            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's X's turn")
-            try view.actualView().controller.takeTurnAt(0)
-            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's O's turn")
-            
-        }
-        
-        ViewHosting.host(view: sut)
-        wait(for: [exp], timeout: 0.1)
-        
-        
-//        XCTAssertEqual(try displayedText(), testXturn)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
-//        sut.controller.takeTurnAt(0) // X
+////        // 🤯 🤓 Automatically updates each time it is called!
+////        let displayedText = { try sut.inspect().find(viewWithTag: "GameBoardViewTitle").text().string() }
+////        
+////        // Is the Play Again Button displayed?
+////        let playAgainButtonOpacity = { try sut.inspect().find(viewWithTag: "PlayAgainButton").opacity() }
+//
+//        let exp = sut.on(\.didAppear) { view in
+//            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's X's turn")
+//            try view.actualView().controller.takeTurnAt(0)
+//            XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's O's turn")
+//            
+//        }
 //        
-//        XCTAssertEqual(try displayedText(), testOturn)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
-//        sut.controller.takeTurnAt(3) // O
+//        ViewHosting.host(view: sut)
+//        wait(for: [exp], timeout: 0.1)
 //        
-//        XCTAssertEqual(try displayedText(), testXturn)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
-//        sut.controller.takeTurnAt(1) // X
 //        
-//        XCTAssertEqual(try displayedText(), testOturn)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
-//        sut.controller.takeTurnAt(4) // O
-//        
-//        XCTAssertEqual(try displayedText(), testXturn)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
-//        sut.controller.takeTurnAt(2) // X Wins
-//        
-//        XCTAssertEqual(try displayedText(), testXwin)
-//        XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
-//        
-        // Also, verify that all SquareViews are displaying the proper image, if any.
-        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
-    }
+////        XCTAssertEqual(try displayedText(), testXturn)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+////        sut.controller.takeTurnAt(0) // X
+////        
+////        XCTAssertEqual(try displayedText(), testOturn)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+////        sut.controller.takeTurnAt(3) // O
+////        
+////        XCTAssertEqual(try displayedText(), testXturn)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+////        sut.controller.takeTurnAt(1) // X
+////        
+////        XCTAssertEqual(try displayedText(), testOturn)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+////        sut.controller.takeTurnAt(4) // O
+////        
+////        XCTAssertEqual(try displayedText(), testXturn)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 0.0)
+////        sut.controller.takeTurnAt(2) // X Wins
+////        
+////        XCTAssertEqual(try displayedText(), testXwin)
+////        XCTAssertEqual(try playAgainButtonOpacity(), 1.0)
+////        
+//        // Also, verify that all SquareViews are displaying the proper image, if any.
+//        try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
+//    }
     
     
     func testGameBoardTitleIsCorrect() throws {
@@ -307,18 +307,30 @@ final class GameBoardViewTests: XCTestCase {
 
     /// Passes whether `currentTurn` is `@Published` or not.
     /// /// But, when NOT `@Published`, the headerTitle doesn't display correctly.
-    func testGameBoardTitleIsCorrect_MoreViewInspector_Q1b() throws {
+    @MainActor func testGameBoardTitleIsCorrect_MoreViewInspector_Q1b() throws {
         // Given that I have a Game Board
-        var sut = GameBoardView()
+        let sut = GameBoardView()
+//        sut.controller.gameBoard[0].action()
         
-        let exp = sut.on(\.didAppear) { view in
+        print("\n\n------------------------------")
+        print(sut.controller.gameHeaderTitle)
+        
+        let exp = sut.inspection.inspect { view in
             XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's X's turn")
-            try view.actualView().controller.takeTurnAt(0)
+            
+            /// Doesn't seem to matter _how_ I call the action()
+//            sut.controller.takeTurnAt(0)
+            try view.actualView().controller.gameBoard[1].action()  // Most accurate
+//            try view.actualView().controller.takeTurnAt(0)
+
             XCTAssert(try view.actualView().inspect().find(viewWithTag: "GameBoardViewTitle").text().string() == "It's O's turn")
         }
         
         ViewHosting.host(view: sut)
         wait(for: [exp], timeout: 0.1)
+        
+        print(sut.controller.gameHeaderTitle)
+        print("------------------------------\n\n")
     }
     
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841467C52C822678002D0257 /* Inspection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841467C42C822678002D0257 /* Inspection.swift */; };
+		841467C72C8226A1002D0257 /* ViewInspector+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841467C62C8226A1002D0257 /* ViewInspector+Extension.swift */; };
 		8417DBDD2C7BC45400E0FC8D /* SquareViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417DBDC2C7BC45400E0FC8D /* SquareViewTests.swift */; };
 		8417DBDF2C7BC47500E0FC8D /* SquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417DBDE2C7BC47500E0FC8D /* SquareView.swift */; };
 		847C244A2C7A196A008D723F /* TicTacToeViewInspectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847C24492C7A196A008D723F /* TicTacToeViewInspectorApp.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841467C42C822678002D0257 /* Inspection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inspection.swift; sourceTree = "<group>"; };
+		841467C62C8226A1002D0257 /* ViewInspector+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewInspector+Extension.swift"; sourceTree = "<group>"; };
 		8417DBDC2C7BC45400E0FC8D /* SquareViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareViewTests.swift; sourceTree = "<group>"; };
 		8417DBDE2C7BC47500E0FC8D /* SquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareView.swift; sourceTree = "<group>"; };
 		847C24462C7A196A008D723F /* TicTacToeViewInspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToeViewInspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +101,7 @@
 				847C24782C7A5745008D723F /* Square.swift */,
 				8417DBDE2C7BC47500E0FC8D /* SquareView.swift */,
 				84E91FF62C7BDB65001F7DC1 /* GameBoardView.swift */,
+				841467C42C822678002D0257 /* Inspection.swift */,
 				847C244D2C7A196C008D723F /* Assets.xcassets */,
 				847C244F2C7A196C008D723F /* Preview Content */,
 			);
@@ -118,6 +123,7 @@
 				847C24762C7A571F008D723F /* SquareTests.swift */,
 				8417DBDC2C7BC45400E0FC8D /* SquareViewTests.swift */,
 				84E91FF82C7BDCC3001F7DC1 /* GameBoardViewTests.swift */,
+				841467C62C8226A1002D0257 /* ViewInspector+Extension.swift */,
 			);
 			path = TicTacToeViewInspectorTests;
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 				847C24792C7A5745008D723F /* Square.swift in Sources */,
 				8417DBDF2C7BC47500E0FC8D /* SquareView.swift in Sources */,
 				847C244C2C7A196A008D723F /* ContentView.swift in Sources */,
+				841467C52C822678002D0257 /* Inspection.swift in Sources */,
 				847C24752C7A4E9E008D723F /* GameController.swift in Sources */,
 				847C244A2C7A196A008D723F /* TicTacToeViewInspectorApp.swift in Sources */,
 				84E91FF72C7BDB65001F7DC1 /* GameBoardView.swift in Sources */,
@@ -241,6 +248,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841467C72C8226A1002D0257 /* ViewInspector+Extension.swift in Sources */,
 				8417DBDD2C7BC45400E0FC8D /* SquareViewTests.swift in Sources */,
 				847C24772C7A571F008D723F /* SquareTests.swift in Sources */,
 				847C245B2C7A196C008D723F /* GameControllerTests.swift in Sources */,
