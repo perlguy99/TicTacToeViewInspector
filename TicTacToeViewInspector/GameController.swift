@@ -12,7 +12,7 @@ class GameController: ObservableObject {
     @Published var currentTurn: Turn = .x
     
     var gameBoard: [Square] = []
-    
+  
     var gameHeaderTitle: String {
         switch gameResult {
         case .inProgress:

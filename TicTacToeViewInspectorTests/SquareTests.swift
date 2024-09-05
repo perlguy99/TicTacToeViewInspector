@@ -22,5 +22,4 @@ final class SquareTests: XCTestCase {
         sut.state = .o
         XCTAssertEqual(sut.state, .o)
     }
-    
 }

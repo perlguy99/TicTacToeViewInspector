@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+/// I was asked why I didn't make this a `@StateObject` instead of `@ObservedObject`
+/// I wasn't exactly sure at the time, so I looked into it further.
+/// 
+/// As a `@StateObject`, the app seems to work properlty when I run it in the simulator,
+/// however, when I run my unit tests it throws an exception and I get several messages like this:
+///
+/// `Accessing StateObject's object without being installed on a View. This will create a new instance each time.`
+///
+/// Using `@ObservedObject` is the correct choice here.
+///
+/// `@ObservedObject`: The view observes an object that is created and owned elsewhere. It does not manage the object's lifecycle.
+/// `@StateObject`: The view creates and owns the observable object. It manages the object's lifecycle, ensuring it persists across view updates.
+///
+/// The `GameController` owns the `Square` and is responsible for managing the lifecycle of the GameBoard's objects.
+///
 struct SquareView: View {
     @ObservedObject var square: Square
     
