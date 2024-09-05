@@ -200,7 +200,6 @@ final class GameBoardViewTests: XCTestCase {
         // Also, verify that all SquareViews are displaying the proper image, if any.
         try? verifyAllNineSquaresForCorrectState(gameBoardView: sut)
     }
-
     
     func testGameBoardTitleIsCorrect_Turns() throws {
         // Given that I have a Game Board
